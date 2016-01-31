@@ -41,8 +41,20 @@ class AppController extends Controller
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler');
+        // $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+         $this->loadComponent('Auth', [
+            'authorize' => ['Controller'], // Added this line
+            'loginRedirect' => [
+                'controller' => 'IndocreatorAdmin',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'IndocreatorAdmin',
+                'action' => 'display',
+                'home'
+            ]
+        ]);
     }
 
     /**
@@ -58,6 +70,20 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+    public function isAuthorized($user)
+    {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['login', 'view', 'display']);
     }
     
 }

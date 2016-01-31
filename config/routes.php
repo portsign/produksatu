@@ -39,7 +39,7 @@ use Cake\Routing\Router;
  * `:action` markers.
  *
  */
-Router::defaultRouteClass('DashedRoute');
+Router::defaultRouteClass('InflectedRoute');
 
 Router::scope('/', function ($routes) {
     /**
@@ -53,8 +53,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/trends', ['controller' => 'Pages', 'action' => 'trends', 'index']);
     $routes->connect('/hot', ['controller' => 'Pages', 'action' => 'hot', 'index']);
     $routes->connect('/gif', ['controller' => 'Pages', 'action' => 'gif', 'index']);
-    
-
+    $routes->connect('/IndocreatorAdmin/login', ['controller' => 'IndocreatorAdmin', 'action' => 'login', 'index']);
+    $routes->redirect('/users/*', 'IndocreatorAdmin/login', ['status' => 302]);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
@@ -79,11 +79,12 @@ Router::scope('/', function ($routes) {
     $routes->fallbacks();
 });
 
-Router::prefix('admin', function($routes) {
-    // All routes here will be prefixed with `/admin`
-    // And have the prefix => admin route element added.
-    $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
-});
+// Router::prefix('admin', function($routes) {
+//     // All routes here will be prefixed with `/admin`
+//     // And have the prefix => admin route element added.
+//     $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+//     $routes->fallbacks();
+// });
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.
