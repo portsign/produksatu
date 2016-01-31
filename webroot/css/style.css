@@ -1,0 +1,18 @@
+a.btn.btn-primary:hover {
+    background-color: #4c9ed9!important;
+}
+a.btn.btn-success:hover {
+    background-color: rgba(63, 182, 24, 0.75)!important;
+}
+.img-header {
+    width: 100%;
+}
+.distance {
+    height: 30px;
+}
+.login-facebook {
+    width: 100%;
+}
+.login-googleplus {
+    width: 100%;
+}

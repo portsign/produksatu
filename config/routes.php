@@ -47,7 +47,13 @@ Router::scope('/', function ($routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $routes->connect('/', ['controller' => 'Pages', 'action' => 'index', 'home']);
+    $routes->connect('/login', ['controller' => 'Pages', 'action' => 'login', 'index']);
+    $routes->connect('/register', ['controller' => 'Pages', 'action' => 'register', 'index']);
+    $routes->connect('/trends', ['controller' => 'Pages', 'action' => 'trends', 'index']);
+    $routes->connect('/hot', ['controller' => 'Pages', 'action' => 'hot', 'index']);
+    $routes->connect('/gif', ['controller' => 'Pages', 'action' => 'gif', 'index']);
+    
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
@@ -70,9 +76,14 @@ Router::scope('/', function ($routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
-    $routes->fallbacks('DashedRoute');
+    $routes->fallbacks();
 });
 
+Router::prefix('admin', function($routes) {
+    // All routes here will be prefixed with `/admin`
+    // And have the prefix => admin route element added.
+    $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+});
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.
